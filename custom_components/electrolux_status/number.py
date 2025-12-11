@@ -85,11 +85,11 @@ class ElectroluxNumber(ElectroluxEntity, NumberEntity):
 
     @property
     def native_step(self) -> float:
-        """Return the max value."""
+        """Return the step value."""
         if self.unit == UnitOfTime.SECONDS:
             return time_seconds_to_minutes(self.capability.get("step", 1))
         if self.unit == UnitOfTemperature.CELSIUS:
-            return self.capability.get("max", 5)
+            return self.capability.get("step", 1)
         return self.capability.get("step", 1)
 
     async def async_set_native_value(self, value: float) -> None:
